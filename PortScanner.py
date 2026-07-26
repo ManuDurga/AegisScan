@@ -29,7 +29,7 @@ def parse_ports(ports_input):
                     st=int(st_end[0])
                     end=int(st_end[1])
                     if st > end or st < 0 or end > 65535:
-                            raise ValueError("Invalid port range")
+                        raise ValueError("Invalid port range")
                     ports.update(range(st,end+1))
                 else:
                     raise ValueError("Invalid port format")
