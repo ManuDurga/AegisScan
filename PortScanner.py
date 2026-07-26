@@ -10,7 +10,6 @@ def scan_ports(target_ip,ports,timeout=1.2):
             if connection_status==0:
                 open_ports.append(port)
         except KeyboardInterrupt:
-            return 
             continue
         except socket.gaierror:
             print("#HOST_ERROR")
@@ -38,7 +37,7 @@ def parse_ports(ports_input):
             else:
                 raise ValueError("Invalid port format")
         else:
-            if i.isdigit() and i<65535:
+            if i.isdigit() and int(i)<65536:
                 ports.add(int(i))
             else:
                 raise ValueError("Invalid port value")
