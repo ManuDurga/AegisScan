@@ -14,7 +14,7 @@ def scan_ports(target_ip,ports,timeout=1.2):
         except socket.gaierror:
             return open_ports
         except socket.error:
-            return open_ports
+            continue
         finally:
             if s:
                 s.close()
