@@ -21,8 +21,8 @@ def scan_ports(target_ip,ports,timeout=1.2):
     return open_ports
 
 def parse_ports(ports_input):
+    ports=set()
     if len(ports_input)!=0:
-        ports=set()
         port_tokens=ports_input.split(',')#converting "1,2,3" to "1","2","3" and "4-7" to "4","5","6","7"
         for i in port_tokens:
             if '-' in i:
