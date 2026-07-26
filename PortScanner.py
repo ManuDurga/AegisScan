@@ -8,7 +8,7 @@ def scan_ports(target_ip,ports,timeout=1.2):
             s.settimeout(timeout)
             connection_status=s.connect_ex((target_ip,port))#value
             if connection_status==0:
-                open_ports.append(port)
+                open_ports.append(port) 
         except socket.gaierror:
             raise ValueError("Invalid target hostname")
         except socket.error:
@@ -41,5 +41,3 @@ def parse_ports(ports_input):
     else:
         raise ValueError("Port input cannot be empty")
     return sorted(ports)
-
-scan_ports(target,ports)
