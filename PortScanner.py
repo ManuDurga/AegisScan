@@ -9,12 +9,10 @@ def scan_ports(target_ip,ports,timeout=1.2):
             connection_status=s.connect_ex((target_ip,port))#value
             if connection_status==0:
                 open_ports.append(port)
-        except KeyboardInterrupt:
-            return open_ports
         except socket.gaierror:
             return open_ports
         except socket.error:
-            continue
+            continue#KeyboardInterrupt to be handled by main.py
         finally:
             if s:
                 s.close()
