@@ -10,13 +10,11 @@ def scan_ports(target_ip,ports,timeout=1.2):
             if connection_status==0:
                 open_ports.append(port)
         except KeyboardInterrupt:
-            continue
+            return open_ports
         except socket.gaierror:
-            print("#HOST_ERROR")
-            continue
+            return open_ports
         except socket.error:
-            print("#SERVER_ERROR")
-            continue
+            return open_ports
         finally:
             if s:
                 s.close()
