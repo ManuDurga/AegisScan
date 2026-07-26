@@ -3,7 +3,7 @@ import pandas as pd
 import datetime
 import os
 
-def scan_network(target_ip):
+def discover_hosts(target_ip):
     """
     AegisScan Discovery Engine
     pdst: Protocol Destination (The IP we are looking for)
@@ -25,17 +25,17 @@ def scan_network(target_ip):
     # [0]: Access only the 'Answered' list of packets
     result = srp(packet, timeout=3, verbose=0)[0]
 
-    clients = []
+    devices = []
     for sent, received in result:
         # psrc: Protocol Source (IP of the responding device)
         # hwsrc: Hardware Source (MAC address of the responding device)
-        clients.append({
-            'Timestamp': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            'IP': received.psrc, 
-            'MAC': received.hwsrc
-        })
+        devices.append({
+            'timestamp': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            'ip': received.psrc, 
+            'mac': received.hwsrc,
+            "status": "active"})
     
-    return clients
+    return devices
 
 def save_to_csv(device_list, file_name="AegisScan_results.csv"):
     """
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     
     print(f"[*] Starting AegisScan on {TARGET_RANGE}...")
     
-    found_devices = scan_network(TARGET_RANGE)
+    found_devices = discover_hosts(TARGET_RANGE)
     
     if found_devices:
         save_to_csv(found_devices)
