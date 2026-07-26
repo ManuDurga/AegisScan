@@ -10,7 +10,7 @@ def scan_ports(target_ip,ports,timeout=1.2):
             if connection_status==0:
                 open_ports.append(port)
         except socket.gaierror:
-            return open_ports
+            raise ValueError("Invalid target hostname")
         except socket.error:
             continue#KeyboardInterrupt to be handled by main.py
         finally:
