@@ -1,4 +1,11 @@
 import socket
+"""
+    Scans a list of TCP ports on a given target IP address to check if they are open.
+    
+    Iterates through each port, creates a TCP socket, and uses connect_ex() 
+    to attempt a connection. A return value of 0 indicates a successful connection 
+    (open port). Handles socket errors and ensures sockets are closed properly.
+    """
 def scan_ports(target_ip,ports,timeout=1.2):
     open_ports=[]
     for port in ports:
@@ -18,6 +25,17 @@ def scan_ports(target_ip,ports,timeout=1.2):
                 s.close()
     return open_ports
 
+"""
+    Parses a user-provided port string (e.g., '22,80,443' or '20-25') 
+    into a sorted list of unique integer port numbers.
+    
+    Validates that:
+    - Port strings are non-empty.
+    - Port ranges are within valid TCP bounds (0 to 65535).
+    - Start ports do not exceed end ports.
+    
+    Raises ValueError on any formatting or range errors.
+    """
 def parse_ports(ports_input):
     ports=set()
     if ports_input:
