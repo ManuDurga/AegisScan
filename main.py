@@ -58,6 +58,21 @@ def main():
 
         # Progressively enrich the device object
         device["open_ports"] = open_ports
+        
+        device["service_banners"] = {}
+        
+        for port in open_ports:
+            print(f"[*] Grabbing banner from {ip_address}:{port}...")
+
+            banner = grab_banner(ip_address, port)
+            
+            if banner:
+                device["service_banners"][port] = banner
+                print(f"[+] Banner found: {banner}")
+            else:
+                device["service_banners"][port] = None
+                print(f"[-] No banner received from port {port}")
+
 
         if open_ports:
             print(f"[+] {ip_address}: Open ports {open_ports}")
