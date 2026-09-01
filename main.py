@@ -2,6 +2,7 @@ import argparse
 
 from discovery import discover_hosts, save_to_csv
 from port_scanner import scan_ports, parse_ports
+from banner_grabber import grab_banner
 
 def main():
 
