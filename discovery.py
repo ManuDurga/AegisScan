@@ -39,18 +39,6 @@ def discover_hosts(target_ip):
 
 def save_to_csv(device_list, file_name="AegisScan_results.csv"):
     """
-    Handles data persistence with a 70% Vision Scaffold.
-    Ensures the dataset is consistent for future ML model training.
-    """
-    # Feature Scaffolding: Reserving space for A through G features
-    scaffold = {
-        'Vendor': "Unknown",
-        'Latency': "0",
-        'Open_Ports': "[]",
-        'Service_Banners': "None",
-        'TTL': "0",
-        'TCP_Window': "0",def save_to_csv(device_list, file_name="AegisScan_results.csv"):
-    """
     Saves the current AegisScan results to a CSV file.
     Each device object contains progressively enriched scan data.
     """
@@ -59,7 +47,7 @@ def save_to_csv(device_list, file_name="AegisScan_results.csv"):
 
     df.to_csv(file_name, index=False)
 
-    print(f"[+] Results saved to '{file_name}'")'")
+    print(f"[+] Results saved to '{file_name}'")
 
 # --- EXECUTION BLOCK ---
 if __name__ == "__main__":
