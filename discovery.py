@@ -49,29 +49,17 @@ def save_to_csv(device_list, file_name="AegisScan_results.csv"):
         'Open_Ports': "[]",
         'Service_Banners': "None",
         'TTL': "0",
-        'TCP_Window': "0",
-        'TCP_Options': "None",
-        'IP_Flags': "None",
-        'Payload_Entropy': "0.0",
-        'Anomaly_Score': "0.0",
-        'Vuln_Link': "None"
-    }
+        'TCP_Window': "0",def save_to_csv(device_list, file_name="AegisScan_results.csv"):
+    """
+    Saves the current AegisScan results to a CSV file.
+    Each device object contains progressively enriched scan data.
+    """
 
-    # Merge discovered data with the scaffold
-    final_data = []
-    for dev in device_list:
-        entry = {**dev, **scaffold} 
-        final_data.append(entry)
+    df = pd.DataFrame(device_list)
 
-    df = pd.DataFrame(final_data)
+    df.to_csv(file_name, index=False)
 
-    # Save logic: Create file if new, append if it exists
-    if not os.path.isfile(file_name):
-        df.to_csv(file_name, index=False)
-        print(f"[+] SUCCESS: Created new database '{file_name}'")
-    else:
-        df.to_csv(file_name, mode='a', header=False, index=False)
-        print(f"[+] SUCCESS: Appended {len(device_list)} results to '{file_name}'")
+    print(f"[+] Results saved to '{file_name}'")'")
 
 # --- EXECUTION BLOCK ---
 if __name__ == "__main__":
